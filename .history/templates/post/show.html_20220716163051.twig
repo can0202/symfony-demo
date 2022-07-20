@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Post Show{% endblock %}
+
+{% block body %}
+    <div class="post__show">
+        <div class="container">
+            <div class="jumbotron">
+                <h1 class="display-3">{{post.title}}</h1>
+                <span class="badge bg-success">{{post.category.title}}</span>
+                <p class="lead">{{ post.content }}</p>
+                <hr class="my-4">
+                <p class="lead">
+                    <a class="btn btn-primary btn-lg" href="{{path('post_edit', {'id': post.id} )}}" role="button">Edit Post</a>
+                </p>
+            </div>
+            <hr class="my-4">
+            <div class="comments">
+                <h4>5 Commnets</h4>
+                <div class="list-group">
+                    <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+                        <div class="d-flex w-100 justify-content-between">
+                        <h5 class="mb-1">List group item heading</h5>
+                        <small class="text-muted">3 days ago</small>
+                        </div>
+                        <p class="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
+                        <small class="text-muted">Donec id elit non mi porta.</small>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

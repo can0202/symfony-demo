@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Category{% endblock %}
+
+{% block body %}
+
+<div class="container">
+{% for message in app.flashes('success') %}
+            <div class="alert alert-success">
+                {{ message }}
+            </div>
+        {% endfor %}
+    <div>
+         <a href="{{ path('create_category') }}" class="btn btn-success">Create New</a>
+    </div>
+
+    <table class="table table-hover">
+  <thead>
+    <tr>
+      <th scope="col">ID</th>
+      <th scope="col">Title</th>
+      <th scope="col">Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for category in categories %}
+        <tr class="table-active">
+            <td>{{ category.id }}</td>
+            <td>{{ category.title }}</td>
+            <td class="d-flex">
+                <a href="{{ path('edit_category', {'id': category.id}) }}" class="btn btn-primary">Edit</a>
+
+                <form action="{{ path('delete_category', {'id': category.id}) }}" method="post"
+                onsubmit="return confirm('Are you sure?');"
+                >
+                    {# the argument of csrf_token() is an arbitrary string used to generate the token #}
+                    <input type="hidden" name="token" value="{{ csrf_token('delete-item') }}"/>
+
+                    <button class="btn btn-danger">Delete</button>
+                </form>
+            </td>
+        </tr>
+    {% endfor %}
+  </tbody>
+</table>
+</div>
+{% endblock %}
